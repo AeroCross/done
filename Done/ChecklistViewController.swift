@@ -22,7 +22,7 @@ class ChecklistViewController: UITableViewController {
 
     override func tableView(tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 100
     }
 
     /*
@@ -42,7 +42,7 @@ class ChecklistViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("ChecklistItem", forIndexPath: indexPath)
         let label = cell.viewWithTag(1000) as! UILabel
 
-        switch indexPath.row {
+        switch (indexPath.row % 5) {
         case 0:
             label.text = "Git gud"
         case 1:
