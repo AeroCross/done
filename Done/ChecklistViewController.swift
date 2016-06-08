@@ -10,6 +10,19 @@ import UIKit
 
 class ChecklistViewController: UITableViewController {
 
+    var items: [ChecklistItem]
+
+    required init?(coder aDecoder: NSCoder) {
+        items = [ChecklistItem]()
+
+        // this is what should be modified when persistent storage is implemented
+        for _ in 1...5 {
+            items.append(ChecklistItem(text: "Lorem ipsum"))
+        }
+
+        super.init(coder: aDecoder)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -18,45 +31,48 @@ class ChecklistViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
 
-    override func tableView(tableView: UITableView,
-                            numberOfRowsInSection section: Int) -> Int {
-        return 100
+    // :numberOfRowsInSection: called by UITableViewController to figure out
+    // how many rows to render
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return items.count
     }
 
-    override func tableView(tableView: UITableView,
-                            cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
+    // :cellForRowAtIndexPath: called by UITableViewController to fetch a
+    // specific cell and modify it
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ChecklistItem", forIndexPath: indexPath)
-        let label = cell.viewWithTag(1000) as! UILabel
+        let item = items[indexPath.row]
 
-        switch (indexPath.row % 5) {
-        case 0:
-            label.text = "Git gud"
-        case 1:
-            label.text = "Not be a casul"
-        case 2:
-            label.text = "Learn some Swift yo"
-        case 3:
-            label.text = "Crush it"
-        case 4:
-            label.text = "Go to sleep"
-        default:
-            label.text = "Whoops"
-        }
+        configureTextForCell(cell, withChecklistItem: item)
+        configureCheckmarkForCell(cell, withChecklistItem: item)
 
         return cell
     }
 
+    // :didSelectRowAtIndexPath: called by UITableViewController to handle
+    // the tap event
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-            if cell.accessoryType == .None {
-                cell.accessoryType = .Checkmark
-            } else {
-                cell.accessoryType = .None
-            }
+        if let cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath) {
+            let item: ChecklistItem = items[indexPath.row]
+
+            item.toggleChecked()
+            configureCheckmarkForCell(cell, withChecklistItem: item)
         }
 
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+
+    func configureTextForCell(cell: UITableViewCell, withChecklistItem item: ChecklistItem) {
+        let label = cell.viewWithTag(1000) as! UILabel
+        label.text = item.text
+    }
+
+    func configureCheckmarkForCell(cell: UITableViewCell, withChecklistItem item: ChecklistItem) {
+        if item.checked {
+            cell.accessoryType = .None
+        } else {
+            cell.accessoryType = .Checkmark
+        }
     }
 
 }
