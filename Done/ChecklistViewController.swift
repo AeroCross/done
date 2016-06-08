@@ -11,10 +11,12 @@ import UIKit
 class ChecklistViewController: UITableViewController {
 
     @IBAction func addItem() {
+        // add to controller
         let newRowIndex = items.count
         let item = ChecklistItem(text: "New Item")
         items.append(item)
 
+        // add to view
         let indexPath = NSIndexPath(forRow: newRowIndex, inSection: 0)
         let indexPaths = [indexPath]
         tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
@@ -65,6 +67,19 @@ class ChecklistViewController: UITableViewController {
         }
 
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+
+    // this automatically enables swipe-to-delete functionality
+    override func tableView(tableView: UITableView,
+                            commitEditingStyle editingStyle: UITableViewCellEditingStyle,
+                            forRowAtIndexPath indexPath: NSIndexPath) {
+
+        // remove from the controller
+        items.removeAtIndex(indexPath.row)
+
+        // remove from the view
+        let indexPaths = [indexPath]
+        tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
     }
 
     func configureTextForCell(cell: UITableViewCell, withChecklistItem item: ChecklistItem) {
