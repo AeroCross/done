@@ -12,12 +12,10 @@ class ChecklistViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     override func tableView(tableView: UITableView,
@@ -25,17 +23,6 @@ class ChecklistViewController: UITableViewController {
         return 100
     }
 
-    /*
-     In the parameter list, the first one (cellForRowAtIndexPath) is an external parameter
-     whereas indexPath is the internal or local parameter.
-     
-     When calling this function, cellForRowAtIndexPath needs to be referenced,
-     but when implementing it, indexPath can only be used.
-     
-     self.tableView(aTableView, cellForRowAtIndexPath: anNSIndexPath)
-     
-     Reference: https://goo.gl/VSScPb — section "Specifying External Parameter Names"
-     */
     override func tableView(tableView: UITableView,
                             cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
