@@ -40,6 +40,23 @@ class ChecklistViewController: UITableViewController {
                             cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCellWithIdentifier("ChecklistItem", forIndexPath: indexPath)
+        let label = cell.viewWithTag(1000) as! UILabel
+
+        switch indexPath.row {
+        case 0:
+            label.text = "Git gud"
+        case 1:
+            label.text = "Not be a casul"
+        case 2:
+            label.text = "Learn some Swift yo"
+        case 3:
+            label.text = "Crush it"
+        case 4:
+            label.text = "Go to sleep"
+        default:
+            label.text = "Whoops"
+        }
+
         return cell
     }
 
