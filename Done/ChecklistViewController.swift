@@ -31,14 +31,10 @@ class ChecklistViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
 
-    // :numberOfRowsInSection: called by UITableViewController to figure out
-    // how many rows to render
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
 
-    // :cellForRowAtIndexPath: called by UITableViewController to fetch a
-    // specific cell and modify it
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ChecklistItem", forIndexPath: indexPath)
         let item = items[indexPath.row]
@@ -49,8 +45,6 @@ class ChecklistViewController: UITableViewController {
         return cell
     }
 
-    // :didSelectRowAtIndexPath: called by UITableViewController to handle
-    // the tap event
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath) {
             let item: ChecklistItem = items[indexPath.row]
