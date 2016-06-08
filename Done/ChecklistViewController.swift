@@ -16,7 +16,7 @@ class ChecklistViewController: UITableViewController {
         items = [ChecklistItem]()
 
         // this is what should be modified when persistent storage is implemented
-        for _ in 1...5 {
+        for _ in 1...150 {
             items.append(ChecklistItem(text: "Lorem ipsum"))
         }
 
