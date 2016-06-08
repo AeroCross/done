@@ -74,9 +74,9 @@ class ChecklistViewController: UITableViewController {
 
     func configureCheckmarkForCell(cell: UITableViewCell, withChecklistItem item: ChecklistItem) {
         if item.checked {
-            cell.accessoryType = .None
-        } else {
             cell.accessoryType = .Checkmark
+        } else {
+            cell.accessoryType = .None
         }
     }
 
